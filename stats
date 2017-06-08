@@ -1,0 +1,9 @@
+#!/bin/sh
+export PATH=./node_modules/.bin:$PATH
+[ -d node_modules ] || yarn
+./generate.js
+time -f "Time to compile (Babel) a class with methods: %E" babel -o class.js --presets es2015 class.es6 && du -b class.js
+time -f " - time to minify (Uglify): %E" node_modules/.bin/uglifyjs class.js -o class.min.js -c -m --screw-ie8 && du -b class.min.js && gzip -kf class.min.js && du -b class.min.js.gz
+time -f " - time to minify (Uglify) with private methods starting with _: %E" node_modules/.bin/uglifyjs class.js -o class.min.js -c -m --mangle-props regex=/^_./ --screw-ie8 && du -b class.min.js && gzip -kf class.min.js && du -b class.min.js.gz
+time -f "Time to compile (Babel) regular functions: %E" babel -o funcs.js --presets es2015 funcs.es6 && du -b funcs.js
+time -f " - time to minify (Uglify): %E" node_modules/.bin/uglifyjs funcs.js -o funcs.min.js -c -m --screw-ie8 && du -b funcs.min.js && gzip -kf funcs.min.js && du -b funcs.min.js.gz

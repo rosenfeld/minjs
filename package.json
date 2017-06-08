@@ -1,0 +1,12 @@
+{
+  "name": "minjs",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Rodrigo Rosenfeld Rosas <rr.rosas@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-preset-es2015": "^6.24.1",
+    "uglify-js": "^3.0.15"
+  }
+}
