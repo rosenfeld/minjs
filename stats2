@@ -1,0 +1,6 @@
+#!/bin/sh
+export PATH=./node_modules/.bin:$PATH
+[ -d node_modules ] || yarn
+./generate.js
+time -f " - time to minify without helper (Uglify): %E" node_modules/.bin/uglifyjs no-helper.js -o no-helper.min.js -c -m --screw-ie8 && du -b no-helper.min.js && gzip -kf no-helper.min.js && du -b no-helper.min.js.gz
+time -f " - time to minify with helper (Uglify): %E" node_modules/.bin/uglifyjs with-helper.js -o with-helper.min.js -c -m --screw-ie8 && du -b with-helper.min.js && gzip -kf with-helper.min.js && du -b with-helper.min.js.gz

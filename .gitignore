@@ -1,3 +1,5 @@
 /class.*
 /funcs.*
+/no-helper*
+/with-helper*
 /node_modules
